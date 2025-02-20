@@ -1,0 +1,112 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.card {
+  position: relative;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 800px;
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &__header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  &__title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    .card__status {
+      position: relative;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+
+      &--success {
+        background-color: green;
+      }
+
+      &--failed {
+        background-color: red;
+      }
+
+      &--upcoming {
+        background-color: blue;
+      }
+    }
+  }
+
+  &__button {
+    background: none;
+    border: 1px solid #007bff;
+    color: #007bff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+      background: #007bff;
+      color: white;
+    }
+  }
+
+  &__body {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+  }
+
+  &__content-copy {
+    font-size: 16px;
+    color: gray;
+    text-align: start;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 50px;
+  }
+
+  &__description {
+    max-width: 500px;
+    color: gray;
+    font-size: 15px;
+  }
+
+  &__image {
+    width: 200px;
+    max-height: 200px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+}
