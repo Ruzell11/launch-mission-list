@@ -2,27 +2,31 @@ import React, { useState, useRef, useCallback } from "react";
 import { useLaunchContext } from "../../store";
 import "./card.scss";
 import ExpandDetails from "../../components/Card/components/ExpandDetails";
+import Spinner from "../Spinner";
 
 const Card = () => {
   const { filteredLaunchesData, launchesMissionData } = useLaunchContext();
   const [visibleCount, setVisibleCount] = useState(10);
   const [expandedIndexes, setExpandedIndexes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const observer = useRef();
   const lastCardRef = useCallback(
     (node) => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          setVisibleCount((prev) => prev + 10);
+        if (entries[0].isIntersecting && !loading) {
+          setLoading(true); 
+          setTimeout(() => {
+            setVisibleCount((prev) => prev + 10);
+            setLoading(false);
+          }, 1000); 
         }
-
       });
       if (node) observer.current.observe(node);
     },
-    []
+    [loading]
   );
-
   const handleToggleExpand = (index) => {
     setExpandedIndexes((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
@@ -61,6 +65,9 @@ const Card = () => {
             </div>
           );
         })}
+
+         {/* Loading Indicator */}
+      {loading && <p className="loading-indicator"><Spinner/> Loading more data...</p>}
 
       {visibleCount >= launchesMissionData.length && (
         <p className="end-of-data">End of list.</p>

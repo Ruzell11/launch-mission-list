@@ -33,6 +33,14 @@ const Search = () => {
 
     setFilteredLaunchesData(filteredResults);
   };
+  
+  const handleKeyUp = (event) => {
+    if (event.key === "Escape") {
+      setQuery("");
+      localStorage.removeItem("searchQuery");
+      setFilteredLaunchesData(launchesMissionData);
+    }
+  };
 
   return (
     <div className="search">
@@ -42,6 +50,7 @@ const Search = () => {
         placeholder="Search..."
         value={query}
         onChange={(e) => onChangeFilterData(e.target.value)}
+        onKeyUp={handleKeyUp}
       />
     </div>
   );
